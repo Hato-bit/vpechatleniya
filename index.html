@@ -18,6 +18,8 @@
   <!-- Плагин для отправки данных в DataPipe/OSF -->
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe@0.5.0"></script>
 
+  <script src="jspsych-survey-html-form.js"></script>
+  
   <style>
     body {
       background-color: #f7f7f7;
@@ -411,7 +413,30 @@
       data: { phase: "control_2" }
     };
     timeline.push(contr2);
-
+    const age_question = {
+  type: jsPsychSurveyHtmlForm,
+  preamble: '<p>Пожалуйста, укажите ваш возраст.</p>',
+  html: `
+    <p>
+      <label>Возраст:
+        <input
+          name="age"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]{1,2}"
+          maxlength="2"
+          required
+          style="width: 3em; text-align: center;"
+        />
+        лет
+      </label>
+    </p>
+  `,
+  autofocus: 'age',
+  button_label: 'Далее',
+  data: { task: 'age' }
+};
+timeline.push(age_question);
     const contr3 = {
       type: jsPsychSurveyText,
       preamble: `
